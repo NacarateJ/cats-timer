@@ -7,6 +7,7 @@ const Timer = () => {
   const [showForm, setShowForm] = useState(false);
   const [inputTime, setInputTime] = useState(5); // User input for time
   const [selectedUnit, setSelectedUnit] = useState("minutes"); // Default unit: minutes
+  const [isTimeUp, setIsTimeUp] = useState(false); // Track if the time has reached 0
 
   const audioRef = useRef(null); // Ref for audio element
 
@@ -18,10 +19,11 @@ const Timer = () => {
       intervalId = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
-    } else if (time === 0) {
-      // Timer reached 0, stop it and play sound
+    } else if (time === 0 && isRunning) {
+      // Timer reached 0, stop it, play sound, and set isTimeUp to true
       setIsRunning(false);
       handleSoundAlert();
+      setIsTimeUp(true);
     }
 
     return () => clearInterval(intervalId);
@@ -40,6 +42,12 @@ const Timer = () => {
 
   // Handle start/stop button click
   const handleStartStop = () => {
+    const unitInSeconds = {
+      seconds: 1,
+      minutes: 60,
+      hours: 3600,
+    };
+    setTime(inputTime * unitInSeconds[selectedUnit]);
     setIsRunning((prevIsRunning) => !prevIsRunning);
     setShowForm(false); // Hide the form when starting the timer
   };
@@ -51,6 +59,9 @@ const Timer = () => {
     }
 
     setShowForm(true);
+    setInputTime(0);
+    setIsTimeUp(false); // Reset isTimeUp to false when resetting the timer
+    handleStopSound();
   };
 
   // Handle sound alert
@@ -78,17 +89,6 @@ const Timer = () => {
     setSelectedUnit(e.target.value);
   };
 
-  // Handle setting custom timer
-  const handleSetCustomTimer = () => {
-    const unitInSeconds = {
-      seconds: 1,
-      minutes: 60,
-      hours: 3600,
-    };
-    setTime(inputTime * unitInSeconds[selectedUnit]);
-    setShowForm(false);
-  };
-
   return (
     <div className="timer">
       {showForm ? (
@@ -106,15 +106,14 @@ const Timer = () => {
             <option value="minutes">Minutes</option>
             <option value="hours">Hours</option>
           </select>
-          <Button onClick={handleSetCustomTimer} text="Set" />
         </div>
       ) : (
         <div className="timer-display">
-          {time === 0 ? "Time is up!" : formatTime(time)}
+          {isTimeUp ? "Time is up!" : formatTime(time)}
         </div>
       )}
       <div className="timer-controls">
-        {time === 0 ? (
+        {isTimeUp ? (
           <>
             <Button onClick={handleStopSound} text="Ok" />
             <Button onClick={handleReset} text="Reset" />
