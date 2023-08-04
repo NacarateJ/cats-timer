@@ -5,8 +5,9 @@ const Timer = () => {
   const [time, setTime] = useState(5 * 60); // Default 5 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [inputTime, setInputTime] = useState(5); // User input for time
-  const [selectedUnit, setSelectedUnit] = useState("minutes"); // Default unit: minutes
+  const [inputHours, setInputHours] = useState(0);
+  const [inputMinutes, setInputMinutes] = useState(5);
+  const [inputSeconds, setInputSeconds] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false); // Track if the time has reached 0
 
   const audioRef = useRef(null); // Ref for audio element
@@ -41,16 +42,15 @@ const Timer = () => {
   };
 
   // Handle start/stop button click
-  const handleStartStop = () => {
-    const unitInSeconds = {
-      seconds: 1,
-      minutes: 60,
-      hours: 3600,
-    };
-    setTime(inputTime * unitInSeconds[selectedUnit]);
-    setIsRunning((prevIsRunning) => !prevIsRunning);
-    setShowForm(false); // Hide the form when starting the timer
-  };
+ const handleStartStop = () => {
+   if (!isRunning) {
+     const totalSeconds =
+       inputHours * 3600 + inputMinutes * 60 + parseInt(inputSeconds);
+     setTime(totalSeconds);
+   }
+   setIsRunning((prevIsRunning) => !prevIsRunning);
+   setShowForm(false); // Hide the form when starting the timer
+ };
 
   // Handle reset button click
   const handleReset = () => {
@@ -59,8 +59,10 @@ const Timer = () => {
     }
 
     setShowForm(true);
-    setInputTime(0);
-    setIsTimeUp(false); // Reset isTimeUp to false when resetting the timer
+    setInputHours(0);
+    setInputMinutes(0);
+    setInputSeconds(0);
+    setIsTimeUp(false);
     handleStopSound();
   };
 
@@ -80,32 +82,61 @@ const Timer = () => {
   };
 
   // Handle input change for custom timer
-  const handleInputChange = (e) => {
-    setInputTime(e.target.value);
-  };
+ const handleInputChange = (e) => {
+   const { name, value } = e.target;
+   // Ensure that the input values are non-negative
+   const nonNegativeValue = Math.max(0, parseInt(value));
 
-  // Handle select change for unit of time (seconds, minutes, hours)
-  const handleSelectChange = (e) => {
-    setSelectedUnit(e.target.value);
-  };
+   // Update the corresponding state based on the input field name
+    switch (name) {
+      case "hours":
+        setInputHours(isNaN(nonNegativeValue) ? 0 : nonNegativeValue);
+        break;
+      case "minutes":
+        setInputMinutes(isNaN(nonNegativeValue) ? 0 : nonNegativeValue);
+        break;
+      case "seconds":
+        setInputSeconds(isNaN(nonNegativeValue) ? 0 : nonNegativeValue);
+        break;
+      default:
+        break;
+    }
+ };
 
   return (
     <div className="timer">
       {showForm ? (
         <div className="timer-form">
-          <label htmlFor="timerInput">Set Timer (minutes):</label>
+          <label htmlFor="timerInputs">Set Timer:</label>
           <input
-            id="timerInput"
+            id="timerInputHours"
+            name="hours"
             type="number"
-            min="1"
-            value={inputTime}
+            placeholder="00h"
+            min="0"
+            value={inputHours}
             onChange={handleInputChange}
           />
-          <select value={selectedUnit} onChange={handleSelectChange}>
-            <option value="seconds">Seconds</option>
-            <option value="minutes">Minutes</option>
-            <option value="hours">Hours</option>
-          </select>
+          <input
+            id="timerInputMinutes"
+            name="minutes"
+            type="number"
+            placeholder="00m"
+            min="0"
+            max="59"
+            value={inputMinutes}
+            onChange={handleInputChange}
+          />
+          <input
+            id="timerInputSeconds"
+            name="seconds"
+            type="number"
+            placeholder="00s"
+            min="0"
+            max="59"
+            value={inputSeconds}
+            onChange={handleInputChange}
+          />
         </div>
       ) : (
         <div className="timer-display">
