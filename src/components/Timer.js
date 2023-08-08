@@ -114,7 +114,7 @@ const Timer = () => {
             type="number"
             placeholder="00h"
             min="0"
-            value={inputHours}
+            value={inputHours === 0 ? '' : inputHours}
             onChange={handleInputChange}
           />
           <input
@@ -124,7 +124,7 @@ const Timer = () => {
             placeholder="00m"
             min="0"
             max="59"
-            value={inputMinutes}
+            value={inputMinutes === 0 ? '' : inputMinutes}
             onChange={handleInputChange}
           />
           <input
@@ -134,7 +134,7 @@ const Timer = () => {
             placeholder="00s"
             min="0"
             max="59"
-            value={inputSeconds}
+            value={inputSeconds === 0 ? '' : inputSeconds}
             onChange={handleInputChange}
           />
         </div>
