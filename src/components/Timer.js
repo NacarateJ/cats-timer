@@ -164,7 +164,7 @@ const Timer = () => {
             )}
           </>
         )}
-        <audio ref={audioRef} loop autoPlay>
+        <audio ref={audioRef} loop>
           <source src="/cat-meows.mp3" type="audio/mpeg" />
         </audio>
       </div>
