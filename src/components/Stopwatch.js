@@ -6,12 +6,15 @@ const Stopwatch = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
 
+  /**
+   * Effect hook for updating time at regular intervals when the stopwatch is running.
+   */
   useEffect(() => {
     let intervalId;
 
-    if (isRunning) {
+    if (isTimerRunning) {
       intervalId = setInterval(() => {
         setMilliseconds((prevMilliseconds) => prevMilliseconds + 10);
 
@@ -35,8 +38,12 @@ const Stopwatch = () => {
     }
 
     return () => clearInterval(intervalId);
-  }, [isRunning, milliseconds, seconds, minutes]);
+  }, [isTimerRunning, milliseconds, seconds, minutes]);
 
+  /**
+   * Format the time in hours, minutes, seconds, and milliseconds.
+   * @returns {string} - Formatted time string.
+   */
   const formatTime = () => {
     const formattedHours = hours.toString().padStart(1, "0");
     const formattedMinutes = minutes.toString().padStart(2, "0");
@@ -55,12 +62,18 @@ const Stopwatch = () => {
     }
   };
 
+  /**
+   * Handle start/stop button click to toggle the stopwatch.
+   */
   const handleStartStop = () => {
-    setIsRunning((prevIsRunning) => !prevIsRunning);
+    setIsTimerRunning((prevIsRunning) => !prevIsRunning);
   };
 
+  /**
+   * Handle reset button click to reset the stopwatch.
+   */
   const handleReset = () => {
-    setIsRunning(false);
+    setIsTimerRunning(false);
     setMilliseconds(0);
     setSeconds(0);
     setMinutes(0);
@@ -71,7 +84,7 @@ const Stopwatch = () => {
     <div className="stopwatch">
       <div className="stopwatch-display">{formatTime()}</div>
       <div className="stopwatch-controls">
-        {isRunning ? (
+        {isTimerRunning ? (
           <Button onClick={handleStartStop} text="Stop" />
         ) : (
           <Button onClick={handleStartStop} text="Start" />
