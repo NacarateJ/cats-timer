@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 
 const Timer = () => {
-  const [time, setTime] = useState(5 * 60); // Default 5 minutes in seconds
-  const [isRunning, setIsRunning] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  const [remainingTimeInSec, setRemainingTimeInSec] = useState(5 * 60); // Default 5 minutes in seconds
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [resetTime, setResetTime] = useState(false);
   const [inputHours, setInputHours] = useState(0);
   const [inputMinutes, setInputMinutes] = useState(5);
   const [inputSeconds, setInputSeconds] = useState(0);
@@ -12,25 +12,31 @@ const Timer = () => {
 
   const audioRef = useRef(null); // Ref for audio element
 
-  // Timer logic
+  /**
+   * Timer logic using useEffect.
+   */
   useEffect(() => {
     let intervalId;
 
-    if (isRunning && time > 0) {
+    if (isTimerRunning && remainingTimeInSec > 0) {
       intervalId = setInterval(() => {
-        setTime((prevTime) => prevTime - 1);
+        setRemainingTimeInSec((prevTime) => prevTime - 1);
       }, 1000);
-    } else if (time === 0 && isRunning) {
+    } else if (remainingTimeInSec === 0 && isTimerRunning) {
       // Timer reached 0, stop it, play sound, and set isTimeUp to true
-      setIsRunning(false);
+      setIsTimerRunning(false);
       handleSoundAlert();
       setIsTimeUp(true);
     }
 
     return () => clearInterval(intervalId);
-  }, [isRunning, time]);
+  }, [isTimerRunning, remainingTimeInSec]);
 
-  // Format time in hh:mm:ss
+  /**
+   * Format time in hh:mm:ss.
+   * @param {number} timeInSeconds - Time in seconds to format.
+   * @returns {string} - Formatted time in hh:mm:ss format.
+   */
   const formatTime = (timeInSeconds) => {
     const hours = Math.floor(timeInSeconds / 3600);
     const minutes = Math.floor((timeInSeconds % 3600) / 60);
@@ -41,39 +47,46 @@ const Timer = () => {
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   };
 
-  // Handle start/stop button click
- const handleStartStop = () => {
-   if (!isRunning) {
-     const totalSeconds =
-       inputHours * 3600 + inputMinutes * 60 + parseInt(inputSeconds);
-     setTime(totalSeconds);
-   }
-   setIsRunning((prevIsRunning) => !prevIsRunning);
-   setShowForm(false); // Hide the form when starting the timer
- };
+  /**
+   * Handle start/stop button click.
+   */
+  const handleStartStop = () => {
+    const totalSeconds =
+      inputHours * 3600 + inputMinutes * 60 + parseInt(inputSeconds);
 
-  // Handle reset button click
-  const handleReset = () => {
-    if (isRunning) {
-      setIsRunning(false);
+    if (resetTime) {
+      setRemainingTimeInSec(totalSeconds);
+      setResetTime(false); // Hide the form when starting the timer
     }
 
-    setShowForm(true);
-    setInputHours(0);
-    setInputMinutes(0);
-    setInputSeconds(0);
+    setIsTimerRunning((prevIsRunning) => !prevIsRunning);
+  };
+
+  /**
+   * Handle reset button click.
+   */
+  const handleReset = () => {
+    if (isTimerRunning) {
+      setIsTimerRunning(false);
+    }
+
+    setResetTime(true);
     setIsTimeUp(false);
     handleStopSound();
   };
 
-  // Handle sound alert
+  /**
+   * Handle sound alert.
+   */
   const handleSoundAlert = () => {
     if (audioRef.current) {
       audioRef.current.play(); // Start the audio playback
     }
   };
 
-  // Handle stop sound
+  /**
+   * Handle stop sound.
+   */
   const handleStopSound = () => {
     if (audioRef.current) {
       audioRef.current.pause(); // Pause the audio playback
@@ -81,13 +94,16 @@ const Timer = () => {
     }
   };
 
-  // Handle input change for custom timer
- const handleInputChange = (e) => {
-   const { name, value } = e.target;
-   // Ensure that the input values are non-negative
-   const nonNegativeValue = Math.max(0, parseInt(value));
+  /**
+   * Handle input change for custom timer.
+   * @param {Object} e - Event object.
+   */
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    // Ensure that the input values are non-negative
+    const nonNegativeValue = Math.max(0, parseInt(value));
 
-   // Update the corresponding state based on the input field name
+    // Update the corresponding state based on the input field name
     switch (name) {
       case "hours":
         setInputHours(isNaN(nonNegativeValue) ? 0 : nonNegativeValue);
@@ -101,11 +117,11 @@ const Timer = () => {
       default:
         break;
     }
- };
+  };
 
   return (
     <div className="timer">
-      {showForm ? (
+      {resetTime ? (
         <div className="timer-form">
           <label htmlFor="timerInputs">Set Timer:</label>
           <input
@@ -114,7 +130,7 @@ const Timer = () => {
             type="number"
             placeholder="00h"
             min="0"
-            value={inputHours === 0 ? '' : inputHours}
+            value={inputHours === 0 ? "" : inputHours}
             onChange={handleInputChange}
           />
           <input
@@ -124,7 +140,7 @@ const Timer = () => {
             placeholder="00m"
             min="0"
             max="59"
-            value={inputMinutes === 0 ? '' : inputMinutes}
+            value={inputMinutes === 0 ? "" : inputMinutes}
             onChange={handleInputChange}
           />
           <input
@@ -134,13 +150,13 @@ const Timer = () => {
             placeholder="00s"
             min="0"
             max="59"
-            value={inputSeconds === 0 ? '' : inputSeconds}
+            value={inputSeconds === 0 ? "" : inputSeconds}
             onChange={handleInputChange}
           />
         </div>
       ) : (
         <div className="timer-display">
-          {isTimeUp ? "Time is up!" : formatTime(time)}
+          {isTimeUp ? "Time is up!" : formatTime(remainingTimeInSec)}
         </div>
       )}
       <div className="timer-controls">
@@ -151,7 +167,7 @@ const Timer = () => {
           </>
         ) : (
           <>
-            {isRunning ? (
+            {isTimerRunning ? (
               <>
                 <Button onClick={handleStartStop} text="Stop" />
                 <Button onClick={handleReset} text="Reset" />
