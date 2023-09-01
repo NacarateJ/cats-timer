@@ -36,9 +36,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^1.4.0",
     "jest": "^27.5.1",
     "node-sass": "^7.0.3"
-    
   }
 }
