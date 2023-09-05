@@ -29,35 +29,28 @@ describe("Stopwatch", () => {
     expect(stopButton).toBeInTheDocument(); // Stop button should appear
 
     act(() => {
-      jest.advanceTimersByTime(1000);
+      jest.advanceTimersByTime(5000);
     });
-
-    act(() => {
-     jest.runOnlyPendingTimers();
-    });
-
-    expect(getByText("01s 00")).toBeInTheDocument();
-
+      
+    expect(getByText("05s 00")).toBeInTheDocument();
+    
     fireEvent.click(stopButton);
-
+    
     expect(startButton).toBeInTheDocument(); // Start button should reappear
   });
-
+  
   it("resets the stopwatch when clicking reset button", () => {
     const { getByText } = render(<Stopwatch />);
-
+    
     const startButton = getByText("Start");
     fireEvent.click(startButton);
-
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    act(() => {
-      jest.runOnlyPendingTimers();
-    });
-
     
+    act(() => {
+      jest.advanceTimersByTime(5 * 60 * 1000);
+    });
+    
+    expect(getByText("05m 00s 00")).toBeInTheDocument();
+ 
     const resetButton = getByText("Reset");
     fireEvent.click(resetButton);
     
