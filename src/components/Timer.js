@@ -180,7 +180,7 @@ const Timer = () => {
             )}
           </>
         )}
-        <audio ref={audioRef} loop>
+        <audio ref={audioRef} loop data-testid="audio-element">
           <source src="/cat-meows.mp3" type="audio/mpeg" />
         </audio>
       </div>
