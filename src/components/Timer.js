@@ -37,13 +37,12 @@ const Timer = () => {
    * @param {number} timeInSeconds - Time in seconds to format.
    * @returns {string} - Formatted time in hh:mm:ss format.
    */
-  const formatTime = (timeInSeconds) => {
-    const hours = Math.floor(timeInSeconds / 3600);
-    const minutes = Math.floor((timeInSeconds % 3600) / 60);
-    const seconds = timeInSeconds % 60;
-    const formattedHours = hours.toString().padStart(2, "0");
-    const formattedMinutes = minutes.toString().padStart(2, "0");
-    const formattedSeconds = seconds.toString().padStart(2, "0");
+  const formatTime = (timeInSeconds) => {const formattedHours = ("0" + Math.floor(timeInSeconds / 3600)).slice(-2);
+    const formattedMinutes = (
+      "0" + Math.floor((timeInSeconds % 3600) / 60)
+    ).slice(-2);
+    const formattedSeconds = ("0" + (timeInSeconds % 60)).slice(-2);
+    
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   };
 
