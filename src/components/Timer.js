@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
+import "./Timer.scss";
 
 const Timer = () => {
   const [remainingTimeInSec, setRemainingTimeInSec] = useState(5 * 60); // Default 5 minutes in seconds
@@ -37,13 +38,20 @@ const Timer = () => {
    * @param {number} timeInSeconds - Time in seconds to format.
    * @returns {string} - Formatted time in hh:mm:ss format.
    */
-  const formatTime = (timeInSeconds) => {const formattedHours = ("0" + Math.floor(timeInSeconds / 3600)).slice(-2);
-    const formattedMinutes = (
-      "0" + Math.floor((timeInSeconds % 3600) / 60)
-    ).slice(-2);
-    const formattedSeconds = ("0" + (timeInSeconds % 60)).slice(-2);
-    
-    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  const formatTime = (timeInSeconds) => {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = ("0" + (timeInSeconds % 60)).slice(-2);
+
+    let formattedTime = "";
+
+    if (hours > 0) {
+      formattedTime += `${hours}h `;
+    }
+
+    formattedTime += `${minutes}m ${seconds}s`;
+
+    return formattedTime;
   };
 
   /**
