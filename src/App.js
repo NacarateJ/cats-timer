@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import CatsImage from "./components/CatsImage";
 import Timer from "./components/Timer";
@@ -6,10 +6,19 @@ import Stopwatch from "./components/Stopwatch";
 
 function App() {
   const [selectedComponent, setSelectedComponent] = useState(null);
+  const [appActivity, setAppActivity] = useState(false);
 
   const handleComponentSelection = (component) => {
     setSelectedComponent(component);
   };
+
+   useEffect(() => {
+     setAppActivity(false);
+   }, [selectedComponent]);
+
+  const toggleAppActivity = (activity) => {
+    setAppActivity(activity);
+  }
 
   return (
     <div className="App">
@@ -32,12 +41,18 @@ function App() {
         </button>
       </div>
 
-      {selectedComponent === "timer" && <Timer />}
-      {selectedComponent === "stopwatch" && <Stopwatch />}
+      {selectedComponent === "timer" && (
+        <Timer toggleAppActivity={toggleAppActivity} />
+      )}
+      {selectedComponent === "stopwatch" && (
+        <Stopwatch toggleAppActivity={toggleAppActivity} />
+      )}
 
-      <div className="component-image">
-        <CatsImage />
-      </div>
+      {appActivity && (
+        <div className="component-image">
+          <CatsImage />
+        </div>
+      )}
     </div>
   );
 }
