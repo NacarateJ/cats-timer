@@ -40,5 +40,15 @@
     "axios": "^1.4.0",
     "jest": "^27.5.1",
     "node-sass": "^7.0.3"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ]
   }
 }
