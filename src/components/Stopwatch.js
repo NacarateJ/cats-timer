@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
+import "./Stopwatch.scss";
 
 const Stopwatch = () => {
   const [time, setTime] = useState(0)
@@ -30,7 +31,7 @@ const Stopwatch = () => {
    const formattedHours = ("0" + Math.floor((time / 3600000) % 24)).slice(-2);
    const formattedMinutes = ("0" + Math.floor((time / 60000) % 60)).slice(-2);
    const formattedSeconds = ("0" + Math.floor((time / 1000) % 60)).slice(-2);
-   const formattedMilliseconds = ("00" + (time % 1000)).slice(-2);
+   const formattedMilliseconds = ("0" + ((time / 10) % 100)).slice(-2);
 
    if (formattedHours !== "00") {
      return `${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s ${formattedMilliseconds}`;
