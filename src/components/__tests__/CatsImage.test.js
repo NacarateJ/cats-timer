@@ -1,19 +1,24 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 import React from "react";
-import { render, waitFor, cleanup } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import axios from "axios";
 import CatsImage from "../CatsImage";
 
 describe("CatsImage", () => {
-
-  afterEach(cleanup);
-
   it("fetches and displays a random cat image", async () => {
+    axios.get.mockResolvedValue({
+      status: 200,
+      statusText: "OK",
+      data: "https://cdn2.thecatapi.com/images/MTUyMzExNg.jpg"
+    });
+
     const { getByAltText } = render(<CatsImage />);
 
-    await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1)); // Adjust the number of expected calls based on your component
+    expect(axios.get).toHaveBeenCalledTimes(1);
 
-    const catImage = getByAltText("Random Cat");
-    expect(catImage).toBeInTheDocument();
+    await waitFor(() => {
+      const catImage = getByAltText("Random Cat");
+      expect(catImage).toBeInTheDocument();
+    });
   });
 });
