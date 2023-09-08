@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import "./Timer.scss";
 
-const Timer = () => {
+const Timer = ({ toggleAppActivity }) => {
   const [remainingTimeInSec, setRemainingTimeInSec] = useState(5 * 60); // Default 5 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [resetTime, setResetTime] = useState(false);
@@ -19,6 +19,16 @@ const Timer = () => {
   useEffect(() => {
     let intervalId;
 
+    /**
+     * Handle sound alert.
+     */
+    const handleSoundAlert = () => {
+      if (audioRef.current) {
+        audioRef.current.play(); // Start the audio playback
+        toggleAppActivity(!isTimerRunning);
+      }
+    };
+
     if (isTimerRunning && remainingTimeInSec > 0) {
       intervalId = setInterval(() => {
         setRemainingTimeInSec((prevTime) => prevTime - 1);
@@ -31,7 +41,7 @@ const Timer = () => {
     }
 
     return () => clearInterval(intervalId);
-  }, [isTimerRunning, remainingTimeInSec]);
+  }, [isTimerRunning, remainingTimeInSec, toggleAppActivity]);
 
   /**
    * Format time in hh:mm:ss.
@@ -67,6 +77,7 @@ const Timer = () => {
     }
 
     setIsTimerRunning((prevIsRunning) => !prevIsRunning);
+    toggleAppActivity(!isTimerRunning);
   };
 
   /**
@@ -75,20 +86,12 @@ const Timer = () => {
   const handleReset = () => {
     if (isTimerRunning) {
       setIsTimerRunning(false);
+      toggleAppActivity(!isTimerRunning);
     }
 
     setResetTime(true);
     setIsTimeUp(false);
     handleStopSound();
-  };
-
-  /**
-   * Handle sound alert.
-   */
-  const handleSoundAlert = () => {
-    if (audioRef.current) {
-      audioRef.current.play(); // Start the audio playback
-    }
   };
 
   /**
