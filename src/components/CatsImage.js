@@ -3,6 +3,7 @@ import axios from "axios";
 
 const CatsImage = () => {
   const [catImageUrl, setCatImageUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Function to fetch a random cat image
@@ -15,6 +16,8 @@ const CatsImage = () => {
         setCatImageUrl(catImage);
       } catch (error) {
         console.error("Error fetching cat image:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -28,7 +31,15 @@ const CatsImage = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <img className="cats-image" src={catImageUrl} alt="Random Cat" />;
+  return (
+    <div className="cats-image">
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        <img src={catImageUrl} alt="Random Cat" />
+      )}
+    </div>
+  );
 };
 
 export default CatsImage;
