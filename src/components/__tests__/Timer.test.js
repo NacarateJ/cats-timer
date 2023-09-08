@@ -12,7 +12,6 @@ import Timer from "../Timer";
 const mockPlay = jest.fn();
 const mockPause = jest.fn();
 
-// Mocking toggleAppActivity
 const mockToggleAppActivity = jest.fn();
 
 beforeAll(() => {
@@ -33,7 +32,7 @@ describe("Timer", () => {
   });
 
   afterEach(() => {
-    jest.clearAllTimers(); // Clear all timers after each test
+    jest.clearAllTimers();
   });
 
   it("renders default time correctly", () => {
@@ -46,29 +45,23 @@ describe("Timer", () => {
       <Timer toggleAppActivity={mockToggleAppActivity} />
     );
 
-    // Start button should be visible
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const startButton = getByText("Start");
     expect(startButton).toBeInTheDocument();
 
-    // Click start button
     fireEvent.click(startButton);
 
-    // Timer should be running
     act(() => {
-      jest.advanceTimersByTime(5000); // Advance the timer by 5 seconds
+      jest.advanceTimersByTime(5000);
     });
 
-    // Stop button should be visible
     const stopButton = getByText("Stop");
     expect(stopButton).toBeInTheDocument();
 
-    // Click stop button
     fireEvent.click(stopButton);
 
     expect(startButton).toBeInTheDocument();
 
-    // Verify that the timer did not change
     expect(getByText("4m 55s")).toBeInTheDocument();
   });
 
@@ -81,15 +74,12 @@ describe("Timer", () => {
     const startButton = getByText("Start");
     expect(startButton).toBeInTheDocument();
 
-    // Click start button
     fireEvent.click(startButton);
 
-    // Timer should be running
     act(() => {
-      jest.advanceTimersByTime(5000); // Advance the timer by 5 seconds
+      jest.advanceTimersByTime(5000);
     });
 
-    // Click reset button
     const resetButton = getByText("Reset");
     fireEvent.click(resetButton);
 
@@ -105,10 +95,8 @@ describe("Timer", () => {
       target: { value: "15" },
     });
 
-    // Click start button
     fireEvent.click(startButton);
 
-    // Verify that the timer changed
     expect(getByText("1h 30m 15s")).toBeInTheDocument();
 
     fireEvent.click(resetButton);
@@ -125,10 +113,8 @@ describe("Timer", () => {
       target: { value: "42" },
     });
 
-    // Click start button
     fireEvent.click(startButton);
 
-    // Verify that the timer changed
     expect(getByText("10m 42s")).toBeInTheDocument();
    
   });
@@ -141,7 +127,6 @@ describe("Timer", () => {
     const startButton = getByText("Start");
     fireEvent.click(startButton);
 
-    // Advance timers by 5 minutes
     act(() => {
       jest.advanceTimersByTime(5 * 60 * 1000);
     });
@@ -154,16 +139,13 @@ describe("Timer", () => {
       <Timer toggleAppActivity={mockToggleAppActivity} />
     );
 
-    // Start the timer
     const startButton = getByText("Start");
     fireEvent.click(startButton);
 
-    // Advance timers to simulate time-up
     act(() => {
       jest.advanceTimersByTime(5 * 60 * 1000);
     });
 
-    // Ensure play method is called
     const audioElement = getByTestId("audio-element");
     expect(audioElement.play).toHaveBeenCalledTimes(1);
 
@@ -171,7 +153,6 @@ describe("Timer", () => {
     const okButton = getByText("Ok");
     fireEvent.click(okButton);
 
-    // Ensure pause method is called
     expect(audioElement.pause).toHaveBeenCalledTimes(1);
     expect(audioElement.currentTime).toBe(0);
   });

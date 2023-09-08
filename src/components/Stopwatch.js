@@ -25,8 +25,10 @@ const Stopwatch = ({ toggleAppActivity }) => {
 
   /**
    * Format the time in hours, minutes, seconds, and milliseconds.
+   *
    * @returns {string} - Formatted time string.
    */
+
   const formatTime = () => {
     const formattedHours = ("0" + Math.floor((time / 3600000) % 24)).slice(-2);
     const formattedMinutes = ("0" + Math.floor((time / 60000) % 60)).slice(-2);
@@ -43,7 +45,8 @@ const Stopwatch = ({ toggleAppActivity }) => {
   };
 
   /**
-   * Handle start/stop button click to toggle the stopwatch.
+   * Handle the start or stop button click.
+   * Toggles the stopwatch running state and informs the parent component of the change.
    */
   const handleStartStop = () => {
     setIsStopwatchRunning((prevIsRunning) => !prevIsRunning);
@@ -51,7 +54,8 @@ const Stopwatch = ({ toggleAppActivity }) => {
   };
 
   /**
-   * Handle reset button click to reset the stopwatch.
+   * Handle the reset button click.
+   * Stops the stopwatch and resets the time to zero, and informs the parent component of the change.
    */
   const handleReset = () => {
     setIsStopwatchRunning(false);

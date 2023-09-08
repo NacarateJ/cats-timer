@@ -11,20 +11,14 @@ const Timer = ({ toggleAppActivity }) => {
   const [inputSeconds, setInputSeconds] = useState(0);
   const [isTimeUp, setIsTimeUp] = useState(false); // Track if the time has reached 0
 
-  const audioRef = useRef(null); // Ref for audio element
+  const audioRef = useRef(null);
 
-  /**
-   * Timer logic using useEffect.
-   */
   useEffect(() => {
     let intervalId;
 
-    /**
-     * Handle sound alert.
-     */
     const handleSoundAlert = () => {
       if (audioRef.current) {
-        audioRef.current.play(); // Start the audio playback
+        audioRef.current.play();
         toggleAppActivity(!isTimerRunning);
       }
     };
@@ -44,9 +38,10 @@ const Timer = ({ toggleAppActivity }) => {
   }, [isTimerRunning, remainingTimeInSec, toggleAppActivity]);
 
   /**
-   * Format time in hh:mm:ss.
+   * Format time in hours, minutes, and seconds.
+   *
    * @param {number} timeInSeconds - Time in seconds to format.
-   * @returns {string} - Formatted time in hh:mm:ss format.
+   * @returns {string} - Formatted time string.
    */
   const formatTime = (timeInSeconds) => {
     const hours = Math.floor(timeInSeconds / 3600);
@@ -64,9 +59,6 @@ const Timer = ({ toggleAppActivity }) => {
     return formattedTime;
   };
 
-  /**
-   * Handle start/stop button click.
-   */
   const handleStartStop = () => {
     const totalSeconds =
       inputHours * 3600 + inputMinutes * 60 + parseInt(inputSeconds);
@@ -80,9 +72,6 @@ const Timer = ({ toggleAppActivity }) => {
     toggleAppActivity(!isTimerRunning);
   };
 
-  /**
-   * Handle reset button click.
-   */
   const handleReset = () => {
     if (isTimerRunning) {
       setIsTimerRunning(false);
@@ -94,9 +83,6 @@ const Timer = ({ toggleAppActivity }) => {
     handleStopSound();
   };
 
-  /**
-   * Handle stop sound.
-   */
   const handleStopSound = () => {
     if (audioRef.current) {
       audioRef.current.pause(); // Pause the audio playback
@@ -105,8 +91,8 @@ const Timer = ({ toggleAppActivity }) => {
   };
 
   /**
-   * Handle input change for custom timer.
-   * @param {Object} e - Event object.
+   * Handle input changes in the timer form.
+   * @param {Object} e - Input change event object.
    */
   const handleInputChange = (e) => {
     const { name, value } = e.target;

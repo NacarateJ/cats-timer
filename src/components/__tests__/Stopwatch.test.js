@@ -3,7 +3,6 @@ import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import Stopwatch from "../Stopwatch";
 
-// Mocking toggleAppActivity
 const mockToggleAppActivity = jest.fn();
 
 describe("Stopwatch", () => {
@@ -26,7 +25,7 @@ describe("Stopwatch", () => {
     fireEvent.click(startButton);
 
     const stopButton = getByText("Stop");
-    expect(stopButton).toBeInTheDocument(); // Stop button should appear
+    expect(stopButton).toBeInTheDocument();
 
     act(() => {
       jest.advanceTimersByTime(5000);
@@ -36,7 +35,7 @@ describe("Stopwatch", () => {
     
     fireEvent.click(stopButton);
     
-    expect(startButton).toBeInTheDocument(); // Start button should reappear
+    expect(startButton).toBeInTheDocument();
   });
   
   it("resets the stopwatch when clicking reset button", () => {
