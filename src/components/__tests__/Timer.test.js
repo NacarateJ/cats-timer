@@ -5,6 +5,7 @@ import {
   render,
   fireEvent,
   act,
+  cleanup
 } from "@testing-library/react";
 import Timer from "../Timer";
 
@@ -25,6 +26,8 @@ beforeAll(() => {
 });
 
 describe("Timer", () => {
+  afterEach(cleanup);
+
   beforeEach(() => {
     jest.useFakeTimers(); // Mock timers
   });

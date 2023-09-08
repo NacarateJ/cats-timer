@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 import React from "react";
-import { render, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act, cleanup } from "@testing-library/react";
 import Stopwatch from "../Stopwatch";
 
 // Helper function to advance time in the component
@@ -9,6 +9,8 @@ import Stopwatch from "../Stopwatch";
 
 
 describe("Stopwatch", () => {
+  afterEach(cleanup); 
+
   beforeEach(() => {
     jest.useFakeTimers(); // Mock timers
   });
