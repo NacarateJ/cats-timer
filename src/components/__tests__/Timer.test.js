@@ -5,13 +5,15 @@ import {
   render,
   fireEvent,
   act,
-  cleanup
 } from "@testing-library/react";
 import Timer from "../Timer";
 
 // Mock play and pause methods of HTMLMediaElement prototype
 const mockPlay = jest.fn();
 const mockPause = jest.fn();
+
+// Mocking toggleAppActivity
+const mockToggleAppActivity = jest.fn();
 
 beforeAll(() => {
   Object.defineProperty(HTMLMediaElement.prototype, 'play', {
@@ -26,8 +28,6 @@ beforeAll(() => {
 });
 
 describe("Timer", () => {
-  afterEach(cleanup);
-
   beforeEach(() => {
     jest.useFakeTimers(); // Mock timers
   });
@@ -42,7 +42,9 @@ describe("Timer", () => {
   });
 
   it("handles start/stop button click correctly", () => {
-    const { getByText } = render(<Timer />);
+    const { getByText } = render(
+      <Timer toggleAppActivity={mockToggleAppActivity} />
+    );
 
     // Start button should be visible
     // eslint-disable-next-line testing-library/prefer-screen-queries
@@ -71,9 +73,8 @@ describe("Timer", () => {
   });
 
   it("handles reset button click correctly", () => {
-    const { getByText, getByPlaceholderText, getByDisplayValue } = render(
-      <Timer />
-    );
+    const { getByText, getByPlaceholderText, getByDisplayValue } =
+      render(<Timer toggleAppActivity={mockToggleAppActivity} />);
 
     expect(getByText("5m 00s")).toBeInTheDocument();
 
@@ -133,7 +134,9 @@ describe("Timer", () => {
   });
 
   it("handles time-up correctly", () => {
-    const { getByText } = render(<Timer />);
+    const { getByText } = render(
+      <Timer toggleAppActivity={mockToggleAppActivity} />
+    );
 
     const startButton = getByText("Start");
     fireEvent.click(startButton);
@@ -147,7 +150,9 @@ describe("Timer", () => {
   });
 
   it("handles sound alert correctly", () => {
-    const { getByText, getByTestId } = render(<Timer />);
+    const { getByText, getByTestId } = render(
+      <Timer toggleAppActivity={mockToggleAppActivity} />
+    );
 
     // Start the timer
     const startButton = getByText("Start");
