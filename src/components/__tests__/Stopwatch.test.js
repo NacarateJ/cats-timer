@@ -1,16 +1,12 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 import React from "react";
-import { render, fireEvent, act, cleanup } from "@testing-library/react";
+import { render, fireEvent, act } from "@testing-library/react";
 import Stopwatch from "../Stopwatch";
 
-// Helper function to advance time in the component
-// const advanceTime = (time) => jest.advanceTimersByTime(time);
-
-
+// Mocking toggleAppActivity
+const mockToggleAppActivity = jest.fn();
 
 describe("Stopwatch", () => {
-  afterEach(cleanup); 
-
   beforeEach(() => {
     jest.useFakeTimers(); // Mock timers
   });
@@ -20,7 +16,9 @@ describe("Stopwatch", () => {
   });
 
   it("starts and stops the stopwatch when clicking start/stop button", () => {
-    const { getByText } = render(<Stopwatch />);
+    const { getByText } = render(
+      <Stopwatch toggleAppActivity={mockToggleAppActivity} />
+    );
 
     expect(getByText("00s 00")).toBeInTheDocument();
 
@@ -42,7 +40,9 @@ describe("Stopwatch", () => {
   });
   
   it("resets the stopwatch when clicking reset button", () => {
-    const { getByText } = render(<Stopwatch />);
+    const { getByText } = render(
+      <Stopwatch toggleAppActivity={mockToggleAppActivity} />
+    );
     
     const startButton = getByText("Start");
     fireEvent.click(startButton);
