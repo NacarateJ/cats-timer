@@ -23,7 +23,7 @@ test("renders Timer component when Timer button is clicked", () => {
 
   fireEvent.click(timerButton);
 
-  expect(getByText("00:05:00")).toBeInTheDocument(); 
+  expect(getByText("5m 00s")).toBeInTheDocument(); 
   expect(queryByText("00s 00")).not.toBeInTheDocument();
 });
 
@@ -33,6 +33,6 @@ test("renders Stopwatch component when Stopwatch button is clicked", () => {
 
   fireEvent.click(stopwatchButton);
 
-  expect(queryByText("00:05:00")).not.toBeInTheDocument();
+  expect(queryByText("5m 00s")).not.toBeInTheDocument();
   expect(getByText("00s 00")).toBeInTheDocument();
 });

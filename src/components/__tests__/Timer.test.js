@@ -35,7 +35,7 @@ describe("Timer", () => {
 
   it("renders default time correctly", () => {
     const { getByText } = render(<Timer />);
-    expect(getByText("00:05:00")).toBeInTheDocument();
+    expect(getByText("5m 00s")).toBeInTheDocument();
   });
 
   it("handles start/stop button click correctly", () => {
@@ -64,7 +64,7 @@ describe("Timer", () => {
     expect(startButton).toBeInTheDocument();
 
     // Verify that the timer did not change
-    expect(getByText("00:04:55")).toBeInTheDocument();
+    expect(getByText("4m 55s")).toBeInTheDocument();
   });
 
   it("handles reset button click correctly", () => {
@@ -72,7 +72,7 @@ describe("Timer", () => {
       <Timer />
     );
 
-    expect(getByText("00:05:00")).toBeInTheDocument();
+    expect(getByText("5m 00s")).toBeInTheDocument();
 
     const startButton = getByText("Start");
     expect(startButton).toBeInTheDocument();
@@ -105,7 +105,7 @@ describe("Timer", () => {
     fireEvent.click(startButton);
 
     // Verify that the timer changed
-    expect(getByText("01:30:15")).toBeInTheDocument();
+    expect(getByText("1h 30m 15s")).toBeInTheDocument();
 
     fireEvent.click(resetButton);
 
@@ -125,7 +125,7 @@ describe("Timer", () => {
     fireEvent.click(startButton);
 
     // Verify that the timer changed
-    expect(getByText("00:10:42")).toBeInTheDocument();
+    expect(getByText("10m 42s")).toBeInTheDocument();
    
   });
 
