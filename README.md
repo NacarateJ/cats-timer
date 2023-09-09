@@ -40,7 +40,7 @@ The Cats Timer App should now be running locally at http://localhost:3000.
 
 <div align="center">
 
-
+https://github.com/NacarateJ/cats-timer/assets/114256348/4aa9eaa1-cf6c-4e1f-8b02-5533f3a348e0
 
 <div/>
 
@@ -54,7 +54,7 @@ The Cats Timer App should now be running locally at http://localhost:3000.
 
 <div align="center">
 
-
+<img width="1406" alt="Screenshot 2023-09-09 at 1 22 51 PM" src="https://github.com/NacarateJ/cats-timer/assets/114256348/82ea75e3-de81-453d-ba25-c07e5d059a35">
 
 <div/>
 
