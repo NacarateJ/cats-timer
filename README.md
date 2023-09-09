@@ -40,6 +40,8 @@ The Cats Timer App should now be running locally at http://localhost:3000.
 
 <div align="center">
 
+*Unmute the video for cute meows and purrs*
+
 https://github.com/NacarateJ/cats-timer/assets/114256348/4aa9eaa1-cf6c-4e1f-8b02-5533f3a348e0
 
 <div/>
@@ -48,7 +50,7 @@ https://github.com/NacarateJ/cats-timer/assets/114256348/4aa9eaa1-cf6c-4e1f-8b02
 
 <div align="left">
  
-## Jest Test Coverage Report
+### Jest Test Coverage Report
 
 </div>
 
