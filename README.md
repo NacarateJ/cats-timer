@@ -38,6 +38,12 @@ The Cats Timer App should now be running locally at http://localhost:3000.
 
 ### Final Product
 
+#### Live App
+
+[Cats Timer](https://cats-timer.netlify.app/)
+
+#### Video Demo
+
 <div align="center">
 
 *Unmute the video for cute meows and purrs*
