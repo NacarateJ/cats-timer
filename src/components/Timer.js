@@ -120,35 +120,37 @@ const Timer = ({ toggleAppActivity }) => {
       {resetTime ? (
         <div className="timer-form">
           <label htmlFor="timerInputs">Set Timer:</label>
-          <input
-            id="timerInputHours"
-            name="hours"
-            type="number"
-            placeholder="00h"
-            min="0"
-            value={inputHours === 0 ? "" : inputHours}
-            onChange={handleInputChange}
-          />
-          <input
-            id="timerInputMinutes"
-            name="minutes"
-            type="number"
-            placeholder="00m"
-            min="0"
-            max="59"
-            value={inputMinutes === 0 ? "" : inputMinutes}
-            onChange={handleInputChange}
-          />
-          <input
-            id="timerInputSeconds"
-            name="seconds"
-            type="number"
-            placeholder="00s"
-            min="0"
-            max="59"
-            value={inputSeconds === 0 ? "" : inputSeconds}
-            onChange={handleInputChange}
-          />
+          <div>
+            <input
+              id="timerInputHours"
+              name="hours"
+              type="number"
+              placeholder="00h"
+              min="0"
+              value={inputHours === 0 ? "" : inputHours}
+              onChange={handleInputChange}
+            />
+            <input
+              id="timerInputMinutes"
+              name="minutes"
+              type="number"
+              placeholder="00m"
+              min="0"
+              max="59"
+              value={inputMinutes === 0 ? "" : inputMinutes}
+              onChange={handleInputChange}
+            />
+            <input
+              id="timerInputSeconds"
+              name="seconds"
+              type="number"
+              placeholder="00s"
+              min="0"
+              max="59"
+              value={inputSeconds === 0 ? "" : inputSeconds}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
       ) : (
         <div className="timer-display">
