@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.scss";
 import CatsImage from "./components/CatsImage";
 import Timer from "./components/Timer";
 import Stopwatch from "./components/Stopwatch";
