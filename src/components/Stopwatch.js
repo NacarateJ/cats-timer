@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
-import "./Stopwatch.scss";
+import "../styles/Stopwatch.scss";
 
 const Stopwatch = ({ toggleAppActivity }) => {
   const [time, setTime] = useState(0);

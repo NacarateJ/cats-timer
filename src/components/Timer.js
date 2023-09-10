@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './Button';
-import "./Timer.scss";
+import "../styles/Timer.scss";
 
 const Timer = ({ toggleAppActivity }) => {
   const [remainingTimeInSec, setRemainingTimeInSec] = useState(5 * 60); // Default 5 minutes in seconds
