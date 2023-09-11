@@ -36,7 +36,7 @@ describe("Timer", () => {
   });
 
   it("renders default time correctly", () => {
-    const { getByText } = render(<Timer />);
+    const { getByText, debug } = render(<Timer />);
     expect(getByText("5m 00s")).toBeInTheDocument();
   });
 
@@ -156,4 +156,35 @@ describe("Timer", () => {
     expect(audioElement.pause).toHaveBeenCalledTimes(1);
     expect(audioElement.currentTime).toBe(0);
   });
+
+  it("sets  timer to default value if no value is passed in the input form", () => {
+    const { getByText, getByPlaceholderText, getByDisplayValue } =
+      render(<Timer toggleAppActivity={mockToggleAppActivity} />);
+
+    const startButton = getByText("Start");
+    fireEvent.click(startButton);
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    const resetButton = getByText("Reset");
+    fireEvent.click(resetButton);
+
+    fireEvent.change(getByPlaceholderText("00h"), {
+      target: { value: "00" },
+    });
+
+    fireEvent.change(getByDisplayValue("5"), {
+      target: { value: "00" },
+    });
+
+    fireEvent.change(getByPlaceholderText("00s"), {
+      target: { value: "00" },
+    });
+
+    fireEvent.click(startButton);
+
+    expect(getByText("5m 00s")).toBeInTheDocument();
+  })
 });
