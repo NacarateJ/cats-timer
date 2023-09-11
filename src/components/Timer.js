@@ -68,6 +68,10 @@ const Timer = ({ toggleAppActivity }) => {
       setResetTime(false); // Hide the form when starting the timer
     }
 
+    if (totalSeconds === 0) {
+      setRemainingTimeInSec(5 * 60);
+    }
+    
     setIsTimerRunning((prevIsRunning) => !prevIsRunning);
     toggleAppActivity(!isTimerRunning);
   };
