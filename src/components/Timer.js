@@ -64,14 +64,18 @@ const Timer = ({ toggleAppActivity }) => {
       inputHours * 3600 + inputMinutes * 60 + parseInt(inputSeconds);
 
     if (resetTime) {
+      if (totalSeconds === 0) {
+        setIsTimeUp(false);
+        setRemainingTimeInSec(totalSeconds);
+        setResetTime(false);
+        return; // Don't start the timer
+      }
       setRemainingTimeInSec(totalSeconds);
-      setResetTime(false); // Hide the form when starting the timer
+      setResetTime(false);
+    } else if (remainingTimeInSec === 0) {
+      return;
     }
 
-    if (totalSeconds === 0) {
-      setRemainingTimeInSec(5 * 60);
-    }
-    
     setIsTimerRunning((prevIsRunning) => !prevIsRunning);
     toggleAppActivity(!isTimerRunning);
   };
@@ -158,7 +162,11 @@ const Timer = ({ toggleAppActivity }) => {
         </div>
       ) : (
         <div className="timer-display">
-          {isTimeUp ? "Time is up!" : formatTime(remainingTimeInSec)}
+          {isTimeUp
+            ? "Time is up!"
+            : remainingTimeInSec === 0
+            ? "Please set a valid time."
+            : formatTime(remainingTimeInSec)}
         </div>
       )}
       <div className="timer-controls">
