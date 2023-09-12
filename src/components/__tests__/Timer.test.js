@@ -157,7 +157,7 @@ describe("Timer", () => {
     expect(audioElement.currentTime).toBe(0);
   });
 
-  it("sets  timer to default value if no value is passed in the input form", () => {
+  it("shows a message if no value is passed in the input form", () => {
     const { getByText, getByPlaceholderText, getByDisplayValue } =
       render(<Timer toggleAppActivity={mockToggleAppActivity} />);
 
@@ -185,6 +185,6 @@ describe("Timer", () => {
 
     fireEvent.click(startButton);
 
-    expect(getByText("5m 00s")).toBeInTheDocument();
+    expect(getByText("Please set a valid time.")).toBeInTheDocument();
   })
 });
