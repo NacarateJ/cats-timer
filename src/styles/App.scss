@@ -30,6 +30,7 @@ body, html {
   .component-selection {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     position: absolute;
     top: 40px;
@@ -55,6 +56,21 @@ body, html {
     padding-bottom: 10px;
   }
 
+  .initial-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+  }
+
   .component-image {
     position: absolute;
     z-index: -1; /* Place it behind other content */
@@ -67,18 +83,8 @@ body, html {
 
 @include medium {
   .App {
-    .component-selection {
-    flex-direction: row;
-    top: 100px;
+    .buttons-container {
+      flex-direction:row;
     }
   }
 }
-
-
-
-
-
-
-
-
-
