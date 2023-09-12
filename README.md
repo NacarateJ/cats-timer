@@ -62,7 +62,12 @@ https://github.com/NacarateJ/cats-timer/assets/114256348/4aa9eaa1-cf6c-4e1f-8b02
 
 <div align="center">
 
-<img width="1406" alt="Screenshot 2023-09-09 at 1 22 51 PM" src="https://github.com/NacarateJ/cats-timer/assets/114256348/82ea75e3-de81-453d-ba25-c07e5d059a35">
+<img width="1438" alt="Screenshot 2023-09-12 at 4 24 40 PM" src="https://github.com/NacarateJ/cats-timer/assets/114256348/cd2c1bcf-a17e-4a6e-8fa6-659a5d40ceba">
+
+<br>
+<br>
+
+<img width="1437" alt="Screenshot 2023-09-12 at 4 25 22 PM" src="https://github.com/NacarateJ/cats-timer/assets/114256348/ccc26a46-5fc6-4602-9cf9-e8bcdec8c3ac">
 
 <div/>
 
