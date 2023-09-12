@@ -25,20 +25,29 @@ function App() {
       <div className="background-color"></div>
 
       <div className="component-selection">
-        <button
-          onClick={() => handleComponentSelection("timer")}
-          className={selectedComponent === "timer" ? "selected-component" : ""}
-        >
-          <span>Timer</span>
-        </button>
-        <button
-          onClick={() => handleComponentSelection("stopwatch")}
-          className={
-            selectedComponent === "stopwatch" ? "selected-component" : ""
-          }
-        >
-          <span>Stopwatch</span>
-        </button>
+        {selectedComponent === null && (
+          <p className="initial-message">
+            How would you like to track your time?
+          </p>
+        )}
+        <div className="buttons-container">
+          <button
+            onClick={() => handleComponentSelection("timer")}
+            className={
+              selectedComponent === "timer" ? "selected-component" : ""
+            }
+          >
+            <span>Timer</span>
+          </button>
+          <button
+            onClick={() => handleComponentSelection("stopwatch")}
+            className={
+              selectedComponent === "stopwatch" ? "selected-component" : ""
+            }
+          >
+            <span>Stopwatch</span>
+          </button>
+        </div>
       </div>
 
       {selectedComponent === "timer" && (
