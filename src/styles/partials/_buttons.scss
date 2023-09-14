@@ -1,0 +1,12 @@
+  @mixin btn-theme {
+      background-color: transparent;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 8px;
+      &:hover {
+        background-color: #080808;
+      }
+    }
