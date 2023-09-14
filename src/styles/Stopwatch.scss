@@ -1,4 +1,7 @@
 @import "./partials/breakpoints";
+@import "./partials/display";
+@import "./partials/controls";
+@import "./partials/buttons";
 
 .stopwatch {
   position: absolute;
@@ -9,31 +12,14 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   &-display {
-    font-size: 60px;
-    font-weight: bold;
-    font-family: monospace;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s ease;
+    @include display-theme;
   }
 
   &-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+    @include controls-theme;
 
     button {
-      background-color: transparent;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 24px;
-      cursor: pointer;
-      &:hover {
-        background-color: #080808;
-      }
-      border-radius: 0.5em;
+      @include btn-theme;
     }
   }
 }

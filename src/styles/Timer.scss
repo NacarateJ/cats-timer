@@ -1,4 +1,7 @@
 @import "./partials/breakpoints";
+@import "./partials/display";
+@import "./partials/controls";
+@import "./partials/buttons";
 
 .timer {
   display: flex;
@@ -38,28 +41,13 @@
   }
 
   &-display {
-    font-size: 55px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    @include display-theme;
   }
 
   &-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+    @include controls-theme;
     button {
-      background-color: transparent;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 24px;
-      cursor: pointer;
-      border-radius: 0.5em;
-      &:hover {
-        background-color: #080808;
-      }
+      @include btn-theme;
     }
   }
 }

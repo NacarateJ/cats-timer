@@ -1,4 +1,5 @@
 @import "./partials/breakpoints";
+@import "./partials/buttons";
 
 body, html {
   height: 100%;
@@ -36,18 +37,10 @@ body, html {
     top: 40px;
 
     button {
-      background-color: transparent;
-      color: #fff;
+      @include btn-theme;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
       font-size: 48px;
       font-weight: bold;
-      border-radius: 0.5em;
-      &:hover {
-        background-color: #080808;
-      }
     }
   }
 
@@ -69,15 +62,6 @@ body, html {
   .buttons-container {
     display: flex;
     flex-direction: column;
-  }
-
-  .component-image {
-    position: absolute;
-    z-index: -1; /* Place it behind other content */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-radius: 5rem;
   }
 }
 
