@@ -12,7 +12,7 @@ This is a fun and interactive React-based web application that allows users to s
 The Cats Timer App should now be running locally at http://localhost:3000.
 
 ### Features
-- Timer with customizable duration.
+- Timer with customizable duration, start, stop and reset functionality.
 - Stopwatch with start, stop, and reset functionality.
 - Cute cat images in the background.
 - Cat meow/purr sound when the timer ends.
