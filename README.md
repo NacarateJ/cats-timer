@@ -48,7 +48,7 @@ The Cats Timer App should now be running locally at http://localhost:3000.
 
 *Unmute the video for cute meows and purrs*
 
-https://github.com/NacarateJ/cats-timer/assets/114256348/4aa9eaa1-cf6c-4e1f-8b02-5533f3a348e0
+https://github.com/NacarateJ/cats-timer/assets/114256348/055dc71f-00f4-4c2e-8afa-891d4be2c30d
 
 <div/>
 
