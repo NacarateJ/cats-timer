@@ -13,8 +13,11 @@ https://github.com/NacarateJ/cats-timer/assets/114256348/055dc71f-00f4-4c2e-8afa
 <div align="left">
 
 #### Live Application
+The application is deployed on Netlify and can be accessed at the following URL:
 
 [![🐱 Cats Timer](https://img.shields.io/badge/🐱-Cats%20Timer-ffcc00)](https://cats-timer.netlify.app/)
+
+Feel free to test out all the features and report any issues.
 
 ### Setup & Usage
 
