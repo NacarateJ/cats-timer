@@ -2,6 +2,20 @@
 
 This is a fun and interactive React-based web application that allows users to set timers, use stopwatches and enjoy delightful cat images while tracking time.
 
+<div align="center">
+
+*Unmute the video for cute meows and purrs*
+
+https://github.com/NacarateJ/cats-timer/assets/114256348/055dc71f-00f4-4c2e-8afa-891d4be2c30d
+
+<div/>
+
+<div align="left">
+
+#### Live Application
+
+[![🐱 Cats Timer](https://img.shields.io/badge/🐱-Cats%20Timer-ffcc00)](https://cats-timer.netlify.app/)
+
 ### Setup & Usage
 
 - Clone the repository and navigate to the project directory.
@@ -35,26 +49,6 @@ The Cats Timer App should now be running locally at http://localhost:3000.
 - **axios:** HTTP client for fetching cat images from the Cat API.
 
 - **node-sass:** SASS compiler for processing styles.
-
-### Final Product
-
-#### Live App
-
-[Cats Timer](https://cats-timer.netlify.app/)
-
-#### Video Demo
-
-<div align="center">
-
-*Unmute the video for cute meows and purrs*
-
-https://github.com/NacarateJ/cats-timer/assets/114256348/055dc71f-00f4-4c2e-8afa-891d4be2c30d
-
-<div/>
-
-<br>
-
-<div align="left">
  
 ### Jest Test Coverage Report
 
@@ -64,7 +58,6 @@ https://github.com/NacarateJ/cats-timer/assets/114256348/055dc71f-00f4-4c2e-8afa
 
 <img width="1438" alt="Screenshot 2023-09-12 at 4 24 40 PM" src="https://github.com/NacarateJ/cats-timer/assets/114256348/cd2c1bcf-a17e-4a6e-8fa6-659a5d40ceba">
 
-<br>
 <br>
 
 <img width="1437" alt="Screenshot 2023-09-12 at 4 25 22 PM" src="https://github.com/NacarateJ/cats-timer/assets/114256348/ccc26a46-5fc6-4602-9cf9-e8bcdec8c3ac">
